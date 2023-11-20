@@ -51,7 +51,7 @@ int Analog ::Get() {
 }
 
 Analog *inputs[6] = {
-    new Analog(A0, -1, 3, -1, 2), new Analog(A1, -1, 2, -1, 1),
+    new Analog(A0, -1, 3, -1, 2), new Analog(A1, -2, 3, -2, 2),
     new Analog(A2, 0, 32767),     new Analog(A3, 0, 32767),
     new Analog(A4, 0, 32767),     new Analog(A5, 0, 32767),
 };
@@ -133,42 +133,46 @@ void loop() {
   switch (x) {
     case -1:
       switch (y) {
-        case 1:
+        case 2:
           js.setButton(0, true);
           break;
-        case -1:
+        case -2:
           js.setButton(1, true);
           break;
       }
       break;
     case 0:
       switch (y) {
-        case 1:
+        case 2:
           js.setButton(2, true);
+          break;
+        case 1:
           js.setHatSwitch(0, 0);
           break;
         case -1:
-          js.setButton(3, true);
           js.setHatSwitch(0, 180);
+          break;
+        case -2:
+          js.setButton(3, true);
           break;
       }
       break;
     case 1:
       switch (y) {
-        case 1:
+        case 2:
           js.setButton(4, true);
           break;
-        case -1:
+        case -2:
           js.setButton(5, true);
           break;
       }
       break;
     case 2:
       switch (y) {
-        case 1:
+        case 2:
           js.setButton(6, true);
           break;
-        case -1:
+        case -2:
           js.setButton(7, true);
           break;
       }
