@@ -63,6 +63,16 @@ void setup() {
   js.setAcceleratorRange(0, 32767);
   js.setBrakeRange(0, 32767);
   js.begin(false);
+  delay(100);
+  for (int i = 0; i < 8; i++) {
+    js.setButton(i, false);
+  }
+  js.setHatSwitch(0, -1);
+  js.setZAxis(0);
+  js.setThrottle(0);
+  js.setBrake(0);
+  js.setAccelerator(0);
+  js.sendState();
 }
 
 void loop() {
@@ -71,12 +81,12 @@ void loop() {
   static int idleBegin = 0;
   static bool sleepMode = false;
   int next[6];
-  delay(1);
+  delay(2);
   for (int i = 0; i < 6; i++) {
     next[i] = inputs[i]->Get();
   }
   cnt++;
-  if (cnt % 10 != 0) return;
+  if (cnt % 5 != 0) return;
   bool changed = false;
   bool active = false;
   for (int i = 0; i < 6; i++) {

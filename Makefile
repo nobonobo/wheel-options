@@ -9,3 +9,7 @@ flash:
 
 mon:
 	arduino-cli monitor --config baudrate=57600 -p $(PORT)
+
+depend:
+	arduino-cli lib install --git-url https://github.com/MHeironimus/ArduinoJoystickLibrary
+	arduino-cli lib install movingAvg
