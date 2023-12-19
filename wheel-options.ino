@@ -9,6 +9,7 @@ class Analog {
 
  public:
   Analog(int pin, int tmin, int tmax, int lmin = 0, int lmax = 0);
+  int VMin();
   int Get();
 
  private:
@@ -34,6 +35,8 @@ Analog ::Analog(int pin, int tmin, int tmax, int lmin = 0, int lmax = 0)
   pinMode(pin, INPUT);
   average.begin();
 }
+
+int Analog ::VMin() { return this->vmin; }
 
 int Analog ::Get() {
   int v = this->average.reading(analogRead(this->pin));
@@ -97,7 +100,7 @@ void loop() {
         active |= next[i] != prev[i];
         break;
       default:
-        active |= abs(next[i] - prev[i]) > 1600;
+        active |= next[i] - inputs[i]->VMin() > 2000;
         break;
     }
     prev[i] = next[i];
