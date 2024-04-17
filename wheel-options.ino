@@ -4,6 +4,8 @@
 Joystick_ js(JOYSTICK_DEFAULT_REPORT_ID, JOYSTICK_TYPE_JOYSTICK, 8, 1, false,
              false, true, false, false, false, false, true, true, true, false);
 
+bool SequentialMode = true;
+
 class Analog {
   static const int AverageN = 32;
 
@@ -145,6 +147,7 @@ void loop() {
   }
   switch (x) {
     case -1:
+      SequentialMode = false;
       switch (y) {
         case 2:
           js.setButton(0, true);
@@ -155,22 +158,34 @@ void loop() {
       }
       break;
     case 0:
-      switch (y) {
-        case 2:
-          js.setButton(2, true);
-          break;
-        case 1:
-          js.setHatSwitch(0, 0);
-          break;
-        case -1:
-          js.setHatSwitch(0, 180);
-          break;
-        case -2:
-          js.setButton(3, true);
-          break;
+      if (SequentialMode) {
+        switch (y) {
+          case 2:
+            js.setHatSwitch(0, 0);
+            break;
+          case -2:
+            js.setHatSwitch(0, 180);
+            break;
+        }
+      } else {
+        switch (y) {
+          case 2:
+            js.setButton(2, true);
+            break;
+          case 1:
+            js.setHatSwitch(0, 0);
+            break;
+          case -2:
+            js.setButton(3, true);
+            break;
+          case -1:
+            js.setHatSwitch(0, 180);
+            break;
+        }
       }
       break;
     case 1:
+      SequentialMode = false;
       switch (y) {
         case 2:
           js.setButton(4, true);
